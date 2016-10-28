@@ -5,6 +5,7 @@
  */
 package lispparsingstacks;
 
+
 import java.util.Stack;
 
 /**
@@ -31,10 +32,11 @@ public class LispParsingStacks {
         newStack.parseLispString(lispString);
         newStack.parseLispString(lispString2);
         newStack.parseLispString(lispString3);
-        newStack.parseLispString(lispString4);
+        newStack.parseLispString(lispString4);        
     }
     
     public void parseLispString(String lisp) {
+        boolean validForm = checkForValidForm(lisp);
         operator op = operator.NONE;
         for(int i = 0; i < lisp.length(); i++) {
             boolean stringInt = isStringInt(Character.toString(lisp.charAt(i)));
@@ -56,29 +58,34 @@ public class LispParsingStacks {
                     inParenthes = true;
                     break;
                 case '+':
-                    op = operator.ADD;
                     haveOperator = true;
+                    op = operator.ADD;
+                    evaluateStack(op,haveOperator);
                     break;
                 case '-':
-                    op = operator.SUBTRACT;
                     haveOperator = true;
+                    op = operator.SUBTRACT;
+                    evaluateStack(op, haveOperator);
                     break;
                 case '*':
-                    op = operator.MULTIPLY;
                     haveOperator = true;
+                    op = operator.MULTIPLY;
+                    evaluateStack(op,haveOperator);
                     break;
                 case '/':
                     op = operator.DIVIDE;
+                    evaluateStack(op,haveOperator);
                     haveOperator = true;
                     break;
                 case ')':
-                    evaluateStack(op);
+                    evaluateStack(op,inParenthes);
                     op = operator.NONE;
                     inParenthes = false;
                     break;
                 default:
                     break; 
             }
+            
         }
     }
     
@@ -89,10 +96,54 @@ public class LispParsingStacks {
     } catch (NumberFormatException ex){
         return false;
     }
-}
-    public void evaluateStack(operator o){
+    } 
+    //check operator and carryout operation 
+    public double evaluateStack(operator o, boolean result){
+        double rightOperand, leftOperand, newResult;
         
+        rightOperand = Double.parseDouble(Character.toString((char) lispParser.pop()));
+        leftOperand = (int)lispParser.pop();
+        if(result = true){
+            if(o == operator.ADD){
+               newResult = rightOperand + leftOperand;
+            }else if(o == operator.SUBTRACT){
+              newResult = rightOperand - leftOperand;
+            }else if(o == operator.MULTIPLY){
+              newResult = rightOperand * leftOperand;
+            }else if(o == operator.DIVIDE){
+              newResult = rightOperand / leftOperand;
+            }else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+//ask for the fuction
+// loop through the function
+// get operators {+, -, /, *}
+// loop through the array add only the operands to the stack
+// get operator function
+// push the operands on to the stack
+// execute the appropiate operation 
     
+    public boolean checkForValidForm(String str){
+        boolean haveParenthesis = false;
+        int countOpenParenthesis = 0;
+        int countCloseParenthesis = 0;
+        
+        for(int i = 0; i < str.length(); i++){
+             if(str.charAt(i)== ')' || str.charAt(i) == '('){
+                 haveParenthesis = true;
+             }
+             if(str.charAt(i)== ')'){
+                 countCloseParenthesis ++;
+             }
+             else if(){
+        }
     }
     
+
 }
+
+

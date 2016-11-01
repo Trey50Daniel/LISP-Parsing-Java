@@ -6,7 +6,7 @@
 package lispparsingstacks;
 
 
-import java.util.Stack;
+import java.util.*;
 
 /**
  *
@@ -16,28 +16,99 @@ public class LispParsingStacks {
     public enum operator {MULTIPLY, DIVIDE, ADD, SUBTRACT, NONE };
     boolean haveOperator = false;
     boolean inParenthes = false;
-    public Stack lispParser = new Stack();
+    Stack<String> lispParser = new Stack<String>();
     boolean opDouble = false;
+    operator op;
+   
+   
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String lispString = "(+15 2 3)";
+        String lispString1 = "(+15 2 3)";
         String lispString2 = "(-15 2 3)";
         String lispString3 = "(*15 2 3)";
         String lispString4 = "(/15 2 3)";
         
+        LispParsingStacks newStack = new LispParsingStacks();
+        newStack.LoadEquation(lispString1);
+    /**
+        
         
         LispParsingStacks newStack = new LispParsingStacks();
-        newStack.parseLispString(lispString);
-        newStack.parseLispString(lispString2);
-        newStack.parseLispString(lispString3);
-        newStack.parseLispString(lispString4);        
+        newStack.LoadEquation();
+       // newStack.LoadEquation();
+      //  newStack.LoadEquation();
+      //  newStack.LoadEquation();        
+    }*/
+
+    /**
+     * LispParsingStacks newStack = new LispParsingStacks();
+        newStack.LoadEquation();
+       // newStack.LoadEquation();
+      //  newStack.LoadEquation();
+      //  newStack.LoadEquation();        
     }
+     
+     * }     */
+    }
+    public void LoadEquation(String str){
+        int len = str.length();
+       String[] newString = new String[len];
+       for(int i = 0; i < len; i++){
+           newString[i] = String.valueOf(str.charAt(i));
+       }
+        parseLispString(newString);
+     //   parseLispString(lispString2);
+     //   parseLispString(lispString3);
+     //   parseLispString(lispString4);  
     
-    public void parseLispString(String lisp) {
-        boolean validForm = checkForValidForm(lisp);
-        operator op = operator.NONE;
+    }
+    public void parseLispString(String[] lisp) {
+        boolean isDigit = false;
+        String[] lisp1 = lisp;
+         boolean validForm = checkForValidForm(lisp);
+        if(validForm = false){
+            System.out.println("Invalid form of equation.");
+        }
+        if(validForm = true){//  while(validForm){
+                op = operator.NONE;
+                boolean haveOperator = false;
+            for(int i = lisp1.length-1; i >= 0; i--){
+                String str = lisp1[i];
+                boolean result = containsDigit(str);
+                if(result = false){
+                   continue;
+                    
+                }
+                else if(result = true){
+                    lispParser.push(lisp[i]);
+                    printStack(lispParser);
+                }
+               
+                if("+".equals(lisp[i])){
+                    op = operator.ADD;
+                    haveOperator = true;
+                }
+                else if("-".equals(lisp[i])){
+                    op = operator.SUBTRACT;
+                    haveOperator = true;
+                }
+                else if("/".equals(lisp[i])){
+                    op = operator.DIVIDE;
+                    haveOperator = true;
+                }
+                else if("*".equals(lisp[i])){
+                    op = operator.MULTIPLY;
+                    haveOperator = true;
+                }
+                
+            }
+            
+       //     evaluateStack(op, haveOperator);
+        }
+       
+        /*operator op = operator.NONE;
         for(int i = 0; i < lisp.length(); i++) {
             boolean stringInt = isStringInt(Character.toString(lisp.charAt(i)));
             if(stringInt || lisp.charAt(i) != ' ') {
@@ -86,8 +157,16 @@ public class LispParsingStacks {
                     break; 
             }
             
-        }
+        }*/
     }
+    private static void printStack(Stack<String> s){
+		if(s.isEmpty()){
+			System.out.println("You have nothing in your stack");
+		}
+		else{
+			System.out.printf("%s Top\n ", s);
+		}
+	}
     
     public boolean isStringInt(String s){
     try{
@@ -95,29 +174,36 @@ public class LispParsingStacks {
         return true;
     } catch (NumberFormatException ex){
         return false;
-    }
+    } 
     } 
     //check operator and carryout operation 
-    public double evaluateStack(operator o, boolean result){
-        double rightOperand, leftOperand, newResult;
+   /* public void evaluateStack(operator o, boolean result){
+        int rightOperand, leftOperand, newResult;
+        int outCome;
         
-        rightOperand = Double.parseDouble(Character.toString((char) lispParser.pop()));
-        leftOperand = (int)lispParser.pop();
+        rightOperand = Integer.parseInt(lispParser.pop());
+        leftOperand = Integer.parseInt(lispParser.pop());
         if(result = true){
             if(o == operator.ADD){
-               newResult = rightOperand + leftOperand;
+                outCome = rightOperand + leftOperand;
+               lispParser.push(String.valueOf(outCome));
             }else if(o == operator.SUBTRACT){
               newResult = rightOperand - leftOperand;
+             
             }else if(o == operator.MULTIPLY){
               newResult = rightOperand * leftOperand;
+              
             }else if(o == operator.DIVIDE){
               newResult = rightOperand / leftOperand;
+             
             }else {
-                return 0;
+              operator op = operator.NONE;
             }
         }
-        return 0;
-    }
+        System.out.println(lispParser.peek());
+      
+    }*/
+    
 
 //ask for the fuction
 // loop through the function
@@ -127,23 +213,53 @@ public class LispParsingStacks {
 // push the operands on to the stack
 // execute the appropiate operation 
     
-    public boolean checkForValidForm(String str){
+    public boolean checkForValidForm(String[] str){
+        boolean validForm = false;
         boolean haveParenthesis = false;
         int countOpenParenthesis = 0;
         int countCloseParenthesis = 0;
-        
-        for(int i = 0; i < str.length(); i++){
-             if(str.charAt(i)== ')' || str.charAt(i) == '('){
+        //have a function running from here that checks if we have parethesis.
+        for(int i = 0; i < str.length; i++){
+             if(")".equals(str[i]) || ")".equals(str[i])){
                  haveParenthesis = true;
              }
-             if(str.charAt(i)== ')'){
-                 countCloseParenthesis ++;
+             if(haveParenthesis && ")".equals(str[i])){
+                 countCloseParenthesis++;
              }
-             else if(){
+             if(haveParenthesis && "(".equals(str[i])){
+                 countOpenParenthesis++;
+             }
+        }
+        if(countCloseParenthesis == countOpenParenthesis){
+            validForm = true;
+            return validForm;
+        }
+        else{
+            return validForm;
+        }
+        
+    }
+    public static boolean containsDigit(String s) {
+    if (s != null && !s.isEmpty()) {
+        for (char c : s.toCharArray()) {
+            if (Character.isDigit(c)) {
+                return true;
+            }
         }
     }
+    return false;
+}
     
+    public boolean isDigit(String str){
+        
+        boolean isDigit = false;
+         try{
+             Integer.parseInt(str);
+             isDigit = true;
+             return isDigit;
+         }catch (Exception  e){
+          return isDigit;
+         }
+    }
 
 }
-
-

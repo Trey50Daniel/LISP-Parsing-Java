@@ -136,57 +136,6 @@ public class LispParsingStacks {
            
             evaluateStack(op, haveOperator);
         }
-       
-        /*operator op = operator.NONE;
-        for(int i = 0; i < lisp.length(); i++) {
-            boolean stringInt = isStringInt(Character.toString(lisp.charAt(i)));
-            if(stringInt || lisp.charAt(i) != ' ') {
-                if(lisp.charAt(i) == ' ') {
-                    continue;
-                }
-                else {
-                    if(inParenthes){
-                       lispParser.push(lisp.charAt(i));
-                    }
-                }
-            }
-            switch(lisp.charAt(i)) {
-                case '.':
-                    opDouble = true;
-                    break;
-                case '(':
-                    inParenthes = true;
-                    break;
-                case '+':
-                    haveOperator = true;
-                    op = operator.ADD;
-                    evaluateStack(op,haveOperator);
-                    break;
-                case '-':
-                    haveOperator = true;
-                    op = operator.SUBTRACT;
-                    evaluateStack(op, haveOperator);
-                    break;
-                case '*':
-                    haveOperator = true;
-                    op = operator.MULTIPLY;
-                    evaluateStack(op,haveOperator);
-                    break;
-                case '/':
-                    op = operator.DIVIDE;
-                    evaluateStack(op,haveOperator);
-                    haveOperator = true;
-                    break;
-                case ')':
-                    evaluateStack(op,inParenthes);
-                    op = operator.NONE;
-                    inParenthes = false;
-                    break;
-                default:
-                    break; 
-            }
-            
-        }*/
     }
     private static void printStack(Stack<String> s){
 		if(s.isEmpty()){
@@ -237,26 +186,7 @@ public class LispParsingStacks {
         lispParser.pop();
         
         printStack(lispParser);
-        /*rightOperand = Integer.parseInt(lispParser.pop());
-        leftOperand = Integer.parseInt(lispParser.pop());
-        if(result = true){
-            if(o == operator.ADD){
-                outCome = rightOperand + leftOperand;
-               lispParser.push(String.valueOf(outCome));
-            }else if(o == operator.SUBTRACT){
-              newResult = rightOperand - leftOperand;
-             
-            }else if(o == operator.MULTIPLY){
-              newResult = rightOperand * leftOperand;
-              
-            }else if(o == operator.DIVIDE){
-              newResult = rightOperand / leftOperand;
-             
-            }else {
-              operator op = operator.NONE;
-            }
-        }
-        System.out.println(lispParser.peek());*/
+        
       
     }
     

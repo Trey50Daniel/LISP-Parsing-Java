@@ -45,10 +45,7 @@ public class LispParsingStacks {
        for(int i = 0; i < len; i++){
            newString[i] = String.valueOf(str.charAt(i));
        }
-        parseLispString(newString);
-     //   parseLispString(lispString2);
-     //   parseLispString(lispString3);
-     //   parseLispString(lispString4);  
+        parseLispString(newString); 
     
     }
     public void parseLispString(String[] lisp) {
@@ -100,15 +97,6 @@ public class LispParsingStacks {
                 }
                 
             
-               /* else if(result = true && result2 != true){
-                    lispParser.push(lisp[i]);
-                    printStack(lispParser);
-                }
-                else if(result2 = true && result != true){
-                    lispParser.push(lisp[i+1]);
-                    printStack(lispParser);
-                }
-               */
             
         
                 if("+".equals(lisp[i])){

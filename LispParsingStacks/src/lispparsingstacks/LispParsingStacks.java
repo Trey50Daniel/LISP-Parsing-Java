@@ -331,7 +331,7 @@ public class LispParsingStacks {
        }
        return result;
     }
-
+ 
 }
 //((15+2) (5+2))
 //if inside parenthesis carry out the operator which is inside the parenthesis

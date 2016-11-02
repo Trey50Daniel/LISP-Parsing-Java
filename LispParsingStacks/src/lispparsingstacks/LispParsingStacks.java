@@ -65,27 +65,62 @@ public class LispParsingStacks {
     
     }
     public void parseLispString(String[] lisp) {
-        boolean isDigit = false;
-        String[] lisp1 = lisp;
+        for(int i = 0; i < lisp.length-1; i++){
+            System.out.println(lisp[i]);
+        }
+     //   boolean isDigit = false;
+       // String[] lisp1 = lisp;
          boolean validForm = checkForValidForm(lisp);
         if(validForm = false){
             System.out.println("Invalid form of equation.");
         }
         if(validForm = true){//  while(validForm){
                 op = operator.NONE;
+                boolean result = false;
+                boolean result2 = false;
+                boolean result3 = false;
                 boolean haveOperator = false;
-            for(int i = lisp1.length-1; i >= 0; i--){
-                String str = lisp1[i];
-                boolean result = containsDigit(str);
-                if(result = false){
-                   continue;
+            for(int i = 0; i < lisp.length-1;i++){
+                //String str = lisp1[i];
+                result = isDigit(lisp[i]);
+                result2 = isDigit(lisp[i+1]);
+                result3 = isParenthesis(lisp[i]);
+            //    if(result = false){
+             //      i--;
+              //  }
+              //  if(result2 = false){System.out.println("");}
+               if(result != true || result2 != true){
+                   // lispParser.push(lisp[i]);
+                   System.out.println("h");
                     
                 }
-                else if(result = true){
+                
+                
+                   if(result && result2){
+                    String newString = "";
+                    newString += lisp[i];
+                    System.out.println(newString);
+                    newString += lisp[i+1];
+                    System.out.println("2nd " +newString);
+                    lispParser.push(newString);
+                    printStack(lispParser);
+                    i++;
+                    
+                }
+                else if(result = true && result2 != true){
                     lispParser.push(lisp[i]);
                     printStack(lispParser);
                 }
-               
+                
+               /* else if(result = true && result2 != true){
+                    lispParser.push(lisp[i]);
+                    printStack(lispParser);
+                }
+                else if(result2 = true && result != true){
+                    lispParser.push(lisp[i+1]);
+                    printStack(lispParser);
+                }
+               */
                 if("+".equals(lisp[i])){
                     op = operator.ADD;
                     haveOperator = true;
@@ -250,7 +285,7 @@ public class LispParsingStacks {
     return false;
 }
     
-    public boolean isDigit(String str){
+    public static boolean isDigit(String str){
         
         boolean isDigit = false;
          try{
@@ -258,8 +293,20 @@ public class LispParsingStacks {
              isDigit = true;
              return isDigit;
          }catch (Exception  e){
-          return isDigit;
+          //str is not a int
          }
+         return isDigit;
+    }
+    public static boolean isParenthesis(String s){
+       boolean result = false;
+       if(s == ""){
+           result = true;
+          
+       }
+       else{
+           result = false;
+       }
+       return result;
     }
 
 }

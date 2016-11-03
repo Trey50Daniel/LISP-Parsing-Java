@@ -161,33 +161,102 @@ public class LispParsingStacks {
         //thirdOperand = Integer.parseInt(s);
         //System.out.println(thirdOperand);
         if(o== operator.ADD){
+            //System.out.println(lispParser);
             for(String st : lispParser) {
-                if(st == "(") {
-                    System.out.println("Wow I'm dumb");
+                if(st.equals("(")) {
+                    //System.out.println("Wow I'm dumb");
                 }
                 else {
                     String temp = st;
-                    System.out.println(temp);
-                    //int temp = Integer.parseInt(st);
-                    //outCome += temp;
-                    System.out.println("it worked eureka!");
+                    //System.out.println("'" + temp + "'");
+                    int tempInt = Integer.parseInt(st);
+                    outCome += tempInt;
                 }
+                //lispParser.pop();
+                //String s = lispParser.pop();
             }
             System.out.println(outCome);
         }else if(o== operator.SUBTRACT){
-            //outCome = thirdOperand - rightOperand - secondOperand;
+            //System.out.println(lispParser);
+            int i = 0;
+            for(String st2 : lispParser) {
+                i++;
+                if(st2.equals("(")) {
+                    //System.out.println("Wow I'm dumb");
+                }
+                else {
+                    if(i == 2 && !st2.equals("(")) {
+                        String temp2 = st2;
+                        int tempInt2 = Integer.parseInt(temp2);
+                        outCome = tempInt2;
+                    }
+                    else {
+                        String temp2 = st2;
+                        //System.out.println("'" + temp2 + "'");
+                        int tempInt2 = Integer.parseInt(temp2);
+                        outCome -= tempInt2;
+                        //System.out.println(outCome);
+                        //System.out.println("it worked eureka!");
+                    }
+                }
+            }
             System.out.println(outCome);
         }
         else if(o== operator.MULTIPLY){
-            //outCome = rightOperand * secondOperand * thirdOperand;
+            //System.out.println(lispParser);
+            int i = 0;
+            for(String st2 : lispParser) {
+                i++;
+                if(st2.equals("(")) {
+                    //System.out.println("Wow I'm dumb");
+                }
+                else {
+                    if(i == 2 && !st2.equals("(")) {
+                        String temp2 = st2;
+                        int tempInt2 = Integer.parseInt(temp2);
+                        outCome = tempInt2;
+                    }
+                    else {
+                        String temp2 = st2;
+                        //System.out.println("'" + temp2 + "'");
+                        int tempInt2 = Integer.parseInt(temp2);
+                        outCome *= tempInt2;
+                        //System.out.println(outCome);
+                        //System.out.println("it worked eureka!");
+                    }
+                }
+            }
             System.out.println(outCome);
         }
         else if(o== operator.DIVIDE){
-            //double doubleOutCome =  (double)thirdOperand / rightOperand / secondOperand;
-            //System.out.println(doubleOutCome);
+            //System.out.println(lispParser);
+            double doubleOutcome = 0;
+            int i = 0;
+            for(String st2 : lispParser) {
+                i++;
+                if(st2.equals("(")) {
+                    //System.out.println("Wow I'm dumb");
+                }
+                else {
+                    if(i == 2 && !st2.equals("(")) {
+                        String temp2 = st2;
+                        double tempDub = Double.parseDouble(temp2);
+                        doubleOutcome = tempDub;
+                    }
+                    else {
+                        String temp2 = st2;
+                        //System.out.println("'" + temp2 + "'");
+                        double tempDub = Double.parseDouble(temp2);
+                        doubleOutcome /= tempDub;
+                        //System.out.println("it worked eureka!");
+                    }
+                }
+            }
+            System.out.println(doubleOutcome);
         }
-        lispParser.pop();
+        lispParser.clear();
         
+        outCome = 0;
         printStack(lispParser);
         
       

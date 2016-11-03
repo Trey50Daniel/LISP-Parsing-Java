@@ -50,43 +50,24 @@ public class LispParsingStacks {
     
     }
     public void parseLispString(String[] lisp) {
-        for(int i = 0; i < lisp.length-1; i++){
-            //System.out.println(lisp[i]);
-        }
-     //   boolean isDigit = false;
-       // String[] lisp1 = lisp;
          boolean validForm = checkForValidForm(lisp);
         if(validForm = false){
             System.out.println("Invalid form of equation.");
         }
-        if(validForm = true){//  while(validForm){
+        if(validForm = true){
                 op = operator.NONE;
                 boolean result = false;
                 boolean result2 = false;
                 boolean result3 = false;
                 boolean haveOperator = false;
             for(int i = 0; i < lisp.length-1;i++){
-                //String str = lisp1[i];
                 result = isDigit(lisp[i]);
                 result2 = isDigit(lisp[i+1]);
                 result3 = isParenthesis(lisp[i]);
-            //    if(result = false){
-             //      i--;
-              //  }
-              //  if(result2 = false){System.out.println("");}
-               if(result != true || result2 != true){
-                   // lispParser.push(lisp[i]);
-                   //System.out.println("P");
-                    
-                }
-                
-                
-                   if(result && result2){
+                if(result && result2){
                     String newString = "";
                     newString += lisp[i];
-                    //System.out.println(newString);
                     newString += lisp[i+1];
-                    //System.out.println("2nd " +newString);
                     lispParser.push(newString);
                     printStack(lispParser);
                     i++;
@@ -94,29 +75,22 @@ public class LispParsingStacks {
                 }
                 else if(result = true && result2 != true){
                     lispParser.push(lisp[i]);
-                    //printStack(lispParser);
                 }
                 
-            
-            
-        
                 if("+".equals(lisp[i])){
-                    //System.out.println("Add");
                     op = operator.ADD;
                     haveOperator = true;
                 }
                 else if("-".equals(lisp[i])){
-                     //System.out.println("Subtract");
                     op = operator.SUBTRACT;
                     haveOperator = true;
                 }
                 else if("/".equals(lisp[i])){
-                     //System.out.println("Divide");
                     op = operator.DIVIDE;
                     haveOperator = true;
                 }
                 else if("*".equals(lisp[i])){
-                     //System.out.println("Multipy");
+                   
                     op = operator.MULTIPLY;
                     haveOperator = true;
                 }
@@ -135,49 +109,24 @@ public class LispParsingStacks {
 		}
 	}
     
-    public boolean isStringInt(String s){
-    try{
-        Integer.parseInt(s);
-        return true;
-    } catch (NumberFormatException ex){
-        return false;
-    } 
-    } 
     //check operator and carryout operation 
     public void evaluateStack(operator o, boolean result){
         int rightOperand, secondOperand, thirdOperand,newResult;
         int outCome = 0;
-        /*for(String s : lispParser) {
-            System.out.println(s);
-        }*/
-        //String s = lispParser.pop();
-        //rightOperand = Integer.parseInt(s);
-        //s = "";
-        //System.out.println(rightOperand);
-       // s = lispParser.pop();
-        //secondOperand = Integer.parseInt(s);
-        //System.out.println(secondOperand);
-        //s = lispParser.pop();
-        //thirdOperand = Integer.parseInt(s);
-        //System.out.println(thirdOperand);
         if(o== operator.ADD){
-            //System.out.println(lispParser);
+            
             for(String st : lispParser) {
                 if(st.equals("(")) {
                     //System.out.println("Wow I'm dumb");
                 }
                 else {
                     String temp = st;
-                    //System.out.println("'" + temp + "'");
                     int tempInt = Integer.parseInt(st);
                     outCome += tempInt;
                 }
-                //lispParser.pop();
-                //String s = lispParser.pop();
             }
             System.out.println(outCome);
         }else if(o== operator.SUBTRACT){
-            //System.out.println(lispParser);
             int i = 0;
             for(String st2 : lispParser) {
                 i++;
@@ -192,18 +141,15 @@ public class LispParsingStacks {
                     }
                     else {
                         String temp2 = st2;
-                        //System.out.println("'" + temp2 + "'");
                         int tempInt2 = Integer.parseInt(temp2);
                         outCome -= tempInt2;
-                        //System.out.println(outCome);
-                        //System.out.println("it worked eureka!");
+                       
                     }
                 }
             }
             System.out.println(outCome);
         }
         else if(o== operator.MULTIPLY){
-            //System.out.println(lispParser);
             int i = 0;
             for(String st2 : lispParser) {
                 i++;
@@ -218,18 +164,16 @@ public class LispParsingStacks {
                     }
                     else {
                         String temp2 = st2;
-                        //System.out.println("'" + temp2 + "'");
                         int tempInt2 = Integer.parseInt(temp2);
                         outCome *= tempInt2;
-                        //System.out.println(outCome);
-                        //System.out.println("it worked eureka!");
+                       
                     }
                 }
             }
             System.out.println(outCome);
         }
         else if(o== operator.DIVIDE){
-            //System.out.println(lispParser);
+            
             double doubleOutcome = 0;
             int i = 0;
             for(String st2 : lispParser) {
@@ -245,10 +189,8 @@ public class LispParsingStacks {
                     }
                     else {
                         String temp2 = st2;
-                        //System.out.println("'" + temp2 + "'");
                         double tempDub = Double.parseDouble(temp2);
                         doubleOutcome /= tempDub;
-                        //System.out.println("it worked eureka!");
                     }
                 }
             }
@@ -263,14 +205,7 @@ public class LispParsingStacks {
     }
     
 
-//ask for the fuction
-// loop through the function
-// get operators {+, -, /, *}
-// loop through the array add only the operands to the stack
-// get operator function
-// push the operands on to the stack
-// execute the appropiate operation 
-    
+
     public boolean checkForValidForm(String[] str){
         boolean validForm = false;
         boolean haveParenthesis = false;
@@ -335,6 +270,3 @@ public class LispParsingStacks {
     }
  
 }
-//((15+2) (5+2))
-//if inside parenthesis carry out the operator which is inside the parenthesis
-// stop once you reach the closing parenthis then push the result on the stack

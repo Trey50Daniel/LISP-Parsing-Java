@@ -51,10 +51,10 @@ public class LispParsingStacks {
     }
     public void parseLispString(String[] lisp) {
          boolean validForm = checkForValidForm(lisp);
-        if(validForm = false){
+        if(validForm == false){
             System.out.println("Invalid form of equation.");
         }
-        if(validForm = true){
+        if(validForm == true){
                 op = operator.NONE;
                 boolean result = false;
                 boolean result2 = false;

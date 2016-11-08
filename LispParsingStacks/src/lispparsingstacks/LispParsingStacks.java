@@ -73,7 +73,7 @@ public class LispParsingStacks {
                     i++;
                     
                 }
-                else if(result = true && result2 != true){
+                else if(result == true && result2 != true){
                     lispParser.push(lisp[i]);
                 }
                 
